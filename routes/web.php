@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index');
 Route::resource('users', 'UserController');
 
 Route::resource('farmroles', 'FarmroleController');
+
+Route::resource('farms', 'FarmController');
