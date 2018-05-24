@@ -37,3 +37,11 @@ Route::resource('farmsales', 'FarmsaleController');
 Route::resource('productypes', 'ProductypeController');
 
 Route::resource('unitofmeasures', 'UnitofmeasureController');
+
+Route::resource('agroinputs', 'AgroinputController');
+
+Route::resource('orderinputs', 'OrderinputController');
+
+Route::resource('agroservices', 'AgroserviceController');
+
+Route::resource('orderservices', 'OrderserviceController');

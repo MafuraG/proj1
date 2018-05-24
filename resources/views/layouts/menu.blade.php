@@ -34,3 +34,19 @@
     <a href="{!! route('unitofmeasures.index') !!}"><i class="fa fa-edit"></i><span>Unitofmeasures</span></a>
 </li>
 
+<li class="{{ Request::is('agroinputs*') ? 'active' : '' }}">
+    <a href="{!! route('agroinputs.index') !!}"><i class="fa fa-edit"></i><span>Agroinputs</span></a>
+</li>
+
+<li class="{{ Request::is('orderinputs*') ? 'active' : '' }}">
+    <a href="{!! route('orderinputs.index') !!}"><i class="fa fa-edit"></i><span>Orderinputs</span></a>
+</li>
+
+<li class="{{ Request::is('agroservices*') ? 'active' : '' }}">
+    <a href="{!! route('agroservices.index') !!}"><i class="fa fa-edit"></i><span>Agroservices</span></a>
+</li>
+
+<li class="{{ Request::is('orderservices*') ? 'active' : '' }}">
+    <a href="{!! route('orderservices.index') !!}"><i class="fa fa-edit"></i><span>Orderservices</span></a>
+</li>
+
