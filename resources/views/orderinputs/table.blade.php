@@ -1,9 +1,9 @@
 <table class="table table-responsive" id="orderinputs-table">
     <thead>
         <tr>
-            <th>Name</th>
-        <th>Task Id</th>
-        <th>Agroinput Id</th>
+        <th>Name</th>
+        <th>Farm task</th>
+        <th>Agroinput</th>
         <th>Price</th>
         <th>Quantity</th>
             <th colspan="3">Action</th>
@@ -13,8 +13,8 @@
     @foreach($orderinputs as $orderinput)
         <tr>
             <td>{!! $orderinput->name !!}</td>
-            <td>{!! $orderinput->task_id !!}</td>
-            <td>{!! $orderinput->agroinput_id !!}</td>
+            <td>{!! $orderinput->task->name !!}</td>
+            <td>{!! $orderinput->agroinput->name !!}</td>
             <td>{!! $orderinput->price !!}</td>
             <td>{!! $orderinput->quantity !!}</td>
             <td>

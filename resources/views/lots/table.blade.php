@@ -14,9 +14,9 @@
         <tr>
             <td>{!! $lot->name !!}</td>
             <td>{!! $lot->detail !!}</td>
-            <td>{!! $lot->active !!}</td>
-            <td>{!! $lot->farm_id !!}</td>
-            <td>{!! $lot->product_id !!}</td>
+            <td>{!! if ($lot->active !!}</td>
+            <td>{!! $lot->farm->name !!}</td>
+            <td>{!! $lot->product->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['lots.destroy', $lot->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

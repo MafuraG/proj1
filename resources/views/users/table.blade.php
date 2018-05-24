@@ -1,11 +1,9 @@
 <table class="table table-responsive" id="users-table">
     <thead>
         <tr>
-            <th>Name</th>
-        <th>Email</th>
-        {{-- <th>Password</th>
-        <th>Remember Token</th> --}}
-        <th>Farmrole Id</th>
+        <th>Name</th>
+        <th>Email</th>        
+        <th>Farm role</th>
         <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -13,10 +11,8 @@
     @foreach($users as $user)
         <tr>
             <td>{!! $user->name !!}</td>
-            <td>{!! $user->email !!}</td>
-            {{-- <td>{!! $user->password !!}</td>
-            <td>{!! $user->remember_token !!}</td> --}}
-            <td>{!! $user->farmrole_id !!}</td>
+            <td>{!! $user->email !!}</td>            
+            <td>{!! $user->farmrole->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

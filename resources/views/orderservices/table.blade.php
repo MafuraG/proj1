@@ -12,8 +12,8 @@
     @foreach($orderservices as $orderservice)
         <tr>
             <td>{!! $orderservice->name !!}</td>
-            <td>{!! $orderservice->task_id !!}</td>
-            <td>{!! $orderservice->agroservice_id !!}</td>
+            <td>{!! $orderservice->task->name !!}</td>
+            <td>{!! $orderservice->agroservice->name !!}</td>
             <td>{!! $orderservice->price !!}</td>
             <td>
                 {!! Form::open(['route' => ['orderservices.destroy', $orderservice->id], 'method' => 'delete']) !!}

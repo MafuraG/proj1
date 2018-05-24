@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="farmsales-table">
     <thead>
         <tr>
-            <th>Lot Id</th>
+            <th>Lot</th>
         <th>Price</th>
         <th>Quantity</th>
             <th colspan="3">Action</th>
@@ -10,7 +10,7 @@
     <tbody>
     @foreach($farmsales as $farmsale)
         <tr>
-            <td>{!! $farmsale->lot_id !!}</td>
+            <td>{!! $farmsale->lot->name !!}</td>
             <td>{!! $farmsale->price !!}</td>
             <td>{!! $farmsale->quantity !!}</td>
             <td>

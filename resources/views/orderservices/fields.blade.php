@@ -12,8 +12,8 @@
 
 <!-- Agroservice Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('agroservice_id', 'Agroservice Id:') !!}
-    {!! Form::number('agroservice_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('agroservice_id', 'Agroservice:') !!}
+    {!! Form::number('agroservice->name', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Price Field -->

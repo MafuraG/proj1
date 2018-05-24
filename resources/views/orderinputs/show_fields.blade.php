@@ -12,14 +12,14 @@
 
 <!-- Task Id Field -->
 <div class="form-group">
-    {!! Form::label('task_id', 'Task Id:') !!}
-    <p>{!! $orderinput->task_id !!}</p>
+    {!! Form::label('task_id', 'Task:') !!}
+    <p>{!! $orderinput->task->name !!}</p>
 </div>
 
 <!-- Agroinput Id Field -->
 <div class="form-group">
-    {!! Form::label('agroinput_id', 'Agroinput Id:') !!}
-    <p>{!! $orderinput->agroinput_id !!}</p>
+    {!! Form::label('agroinput_id', 'Agroinput:') !!}
+    <p>{!! $orderinput->agroinput->name !!}</p>
 </div>
 
 <!-- Price Field -->
@@ -34,21 +34,4 @@
     <p>{!! $orderinput->quantity !!}</p>
 </div>
 
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $orderinput->created_at !!}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $orderinput->updated_at !!}</p>
-</div>
-
-<!-- Deleted At Field -->
-<div class="form-group">
-    {!! Form::label('deleted_at', 'Deleted At:') !!}
-    <p>{!! $orderinput->deleted_at !!}</p>
-</div>
 

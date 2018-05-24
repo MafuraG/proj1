@@ -10,7 +10,7 @@
     @foreach($agroinputs as $agroinput)
         <tr>
             <td>{!! $agroinput->name !!}</td>
-            <td>{!! $agroinput->unitofmeasure_id !!}</td>
+            <td>{!! $agroinput->unitofmeasure->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['agroinputs.destroy', $agroinput->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -3,7 +3,7 @@
         <tr>
             <th>Name</th>
         <th>Productype Id</th>
-        <th>Unitofmeasure Id</th>
+        <th>Unit of measure</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $product->name !!}</td>
             <td>{!! $product->productype_id !!}</td>
-            <td>{!! $product->unitofmeasure_id !!}</td>
+            <td>{!! $product->unitofmeasure->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $task->name !!}</td>
             <td>{!! $task->detail !!}</td>
-            <td>{!! $task->lot_id !!}</td>
+            <td>{!! $task->lot->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

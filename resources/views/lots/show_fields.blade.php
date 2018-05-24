@@ -24,31 +24,15 @@
 
 <!-- Farm Id Field -->
 <div class="form-group">
-    {!! Form::label('farm_id', 'Farm Id:') !!}
-    <p>{!! $lot->farm_id !!}</p>
+    {!! Form::label('farm_id', 'Farm name:') !!}
+    <p>{!! $lot->farm->name !!}</p>
 </div>
 
 <!-- Product Id Field -->
 <div class="form-group">
-    {!! Form::label('product_id', 'Product Id:') !!}
-    <p>{!! $lot->product_id !!}</p>
+    {!! Form::label('product_id', 'Product :') !!}
+    <p>{!! $lot->product->name !!}</p>
 </div>
 
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $lot->created_at !!}</p>
-</div>
 
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $lot->updated_at !!}</p>
-</div>
-
-<!-- Deleted At Field -->
-<div class="form-group">
-    {!! Form::label('deleted_at', 'Deleted At:') !!}
-    <p>{!! $lot->deleted_at !!}</p>
-</div>
 
