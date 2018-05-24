@@ -14,7 +14,7 @@
         <tr>
             <td>{!! $lot->name !!}</td>
             <td>{!! $lot->detail !!}</td>
-            <td>{!! if ($lot->active !!}</td>
+            <td>{!! $lot->active !!}</td>
             <td>{!! $lot->farm->name !!}</td>
             <td>{!! $lot->product->name !!}</td>
             <td>

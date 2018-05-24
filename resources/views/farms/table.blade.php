@@ -3,7 +3,7 @@
         <tr>
             <th>Name</th>
         <th>Address</th>
-        <th>User Id</th>
+        <th>User Name</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $farm->name !!}</td>
             <td>{!! $farm->address !!}</td>
-            <td>{!! $farm->user_id !!}</td>
+            <td>{!! $farm->user->name!!}</td>
             <td>
                 {!! Form::open(['route' => ['farms.destroy', $farm->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

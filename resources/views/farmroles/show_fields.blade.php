@@ -10,15 +10,5 @@
     <p>{!! $farmrole->name !!}</p>
 </div>
 
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{!! $farmrole->created_at !!}</p>
-</div>
 
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{!! $farmrole->updated_at !!}</p>
-</div>
 

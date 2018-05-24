@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="farmsales-table">
     <thead>
         <tr>
-            <th>Lot</th>
+        <th>Lot</th>
         <th>Price</th>
         <th>Quantity</th>
             <th colspan="3">Action</th>

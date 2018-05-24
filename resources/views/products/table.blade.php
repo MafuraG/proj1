@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Name</th>
-        <th>Productype Id</th>
+        <th>Produc type</th>
         <th>Unit of measure</th>
             <th colspan="3">Action</th>
         </tr>
@@ -11,7 +11,7 @@
     @foreach($products as $product)
         <tr>
             <td>{!! $product->name !!}</td>
-            <td>{!! $product->productype_id !!}</td>
+            <td>{!! $product->productype->name !!}</td>
             <td>{!! $product->unitofmeasure->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
