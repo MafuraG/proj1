@@ -45,3 +45,5 @@ Route::resource('orderinputs', 'OrderinputController');
 Route::resource('agroservices', 'AgroserviceController');
 
 Route::resource('orderservices', 'OrderserviceController');
+
+Route::resource('farmproducts', 'FarmproductController');
