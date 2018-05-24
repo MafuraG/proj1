@@ -25,3 +25,11 @@ Route::resource('users', 'UserController');
 Route::resource('farmroles', 'FarmroleController');
 
 Route::resource('farms', 'FarmController');
+
+Route::resource('lots', 'LotController');
+
+Route::resource('products', 'ProductController');
+
+Route::resource('tasks', 'TaskController');
+
+Route::resource('farmsales', 'FarmsaleController');
