@@ -33,3 +33,7 @@ Route::resource('products', 'ProductController');
 Route::resource('tasks', 'TaskController');
 
 Route::resource('farmsales', 'FarmsaleController');
+
+Route::resource('productypes', 'ProductypeController');
+
+Route::resource('unitofmeasures', 'UnitofmeasureController');

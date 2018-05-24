@@ -26,3 +26,11 @@
     <a href="{!! route('farmsales.index') !!}"><i class="fa fa-edit"></i><span>Farmsales</span></a>
 </li>
 
+<li class="{{ Request::is('productypes*') ? 'active' : '' }}">
+    <a href="{!! route('productypes.index') !!}"><i class="fa fa-edit"></i><span>Productypes</span></a>
+</li>
+
+<li class="{{ Request::is('unitofmeasures*') ? 'active' : '' }}">
+    <a href="{!! route('unitofmeasures.index') !!}"><i class="fa fa-edit"></i><span>Unitofmeasures</span></a>
+</li>
+
