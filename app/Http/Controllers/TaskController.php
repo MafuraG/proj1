@@ -114,9 +114,13 @@ class TaskController extends AppBaseController
         //echo($userfarms_ids) ;
 
         $lot = $this->lotRepository->model();
-        $userlots = $lot::whereIn('farm_id',$userfarms_ids)
-                            ->select('name')
-                            ->get();
+        $datas = $lot::whereIn('farm_id',$userfarms_ids)->get();
+        $items = array();
+        foreach ($datas as $data)
+        {
+            $items[$data->id] = $data->name;
+        }
+
 
         if (empty($task)) {
             Flash::error('Task not found');
@@ -126,7 +130,7 @@ class TaskController extends AppBaseController
 
         return view('tasks.edit')
                 ->with('task', $task)
-                ->with('userlots',$userlots);
+                ->with('userlots',$items);
     }
 
     /**

@@ -13,8 +13,7 @@
 <!-- Lot Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('lot_id', 'Lot :') !!}
-    <!-- {!! Form::number('lot_id', null, ['class' => 'form-control']) !!} -->
-    {!! Form::select('lot_id', $userlots, $task->lot, ['placeholder' => 'Pick a farm lot...'])!!}
+    {!! Form::select('lot_id', $userlots, $task->lot_id, ['placeholder' => 'Pick a farm lot...','class' => 'form-control'])!!}
 </div>
 
 <!-- Submit Field -->
