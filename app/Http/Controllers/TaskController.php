@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Repositories\TaskRepository;
+use App\Repositories\LotRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +16,13 @@ class TaskController extends AppBaseController
 {
     /** @var  TaskRepository */
     private $taskRepository;
+    private $lotRepository;
 
-    public function __construct(TaskRepository $taskRepo)
+    public function __construct(TaskRepository $taskRepo,
+                                LotRepository $lotRepo)
     {
         $this->taskRepository = $taskRepo;
+        $this->lotRepository = $lotRepo;
     }
 
     /**
@@ -30,8 +34,18 @@ class TaskController extends AppBaseController
     public function index(Request $request)
     {
         $this->taskRepository->pushCriteria(new RequestCriteria($request));
-        $tasks = $this->taskRepository->all();
-
+        $farm_ids = \Auth::user()->farms()->select('id')->get();
+        
+        $tasks = $this->taskRepository->model();
+       
+        $lot_ids =$this->lotRepository->model()
+                            ::whereIn('farm_id',$farm_ids)
+                            ->select('id')
+                            ->get();
+        
+        $tasks = $this->taskRepository->model()
+                        ::whereIn('lot_id',$lot_ids)
+                        ->get();
         return view('tasks.index')
             ->with('tasks', $tasks);
     }
@@ -94,6 +108,15 @@ class TaskController extends AppBaseController
     public function edit($id)
     {
         $task = $this->taskRepository->findWithoutFail($id);
+        $user = \Auth::user();
+
+        $userfarms_ids = $user->farms()->select('id')->get();
+        //echo($userfarms_ids) ;
+
+        $lot = $this->lotRepository->model();
+        $userlots = $lot::whereIn('farm_id',$userfarms_ids)
+                            ->select('name')
+                            ->get();
 
         if (empty($task)) {
             Flash::error('Task not found');
@@ -101,7 +124,9 @@ class TaskController extends AppBaseController
             return redirect(route('tasks.index'));
         }
 
-        return view('tasks.edit')->with('task', $task);
+        return view('tasks.edit')
+                ->with('task', $task)
+                ->with('userlots',$userlots);
     }
 
     /**

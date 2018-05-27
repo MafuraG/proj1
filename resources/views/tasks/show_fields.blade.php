@@ -18,7 +18,7 @@
 
 <!-- Lot Id Field -->
 <div class="form-group">
-    {!! Form::label('lot_id', 'Lot Id:') !!}
+    {!! Form::label('lot_id', 'Lot :') !!}
     <p>{!! $task->lot->name !!}</p>
 </div>
 
