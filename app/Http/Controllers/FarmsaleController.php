@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateFarmsaleRequest;
 use App\Http\Requests\UpdateFarmsaleRequest;
 use App\Repositories\FarmsaleRepository;
+use App\Repositories\LotRepository;
+use App\Repositories\FarmRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +17,16 @@ class FarmsaleController extends AppBaseController
 {
     /** @var  FarmsaleRepository */
     private $farmsaleRepository;
+    private $lotRepository;
+    private $farmRepository;
 
-    public function __construct(FarmsaleRepository $farmsaleRepo)
+    public function __construct(FarmsaleRepository $farmsaleRepo,
+                                LotRepository $lotRepo,
+                                FarmRepository $farmRepo)
     {
         $this->farmsaleRepository = $farmsaleRepo;
+        $this->lotRepository = $lotRepo;
+        $this->farmRepository = $farmRepo;
     }
 
     /**
@@ -30,8 +38,24 @@ class FarmsaleController extends AppBaseController
     public function index(Request $request)
     {
         $this->farmsaleRepository->pushCriteria(new RequestCriteria($request));
-        $farmsales = $this->farmsaleRepository->all();
+        $farmsales = $this->farmsaleRepository->model();
 
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();
+        //get lots belonging to that user
+        $lot_ids = $this->lotRepository->model()
+                    ::whereIn('farm_id',$farm_ids)
+                    ->select('id')
+                    ->get();
+        //get farm sales for this farmer
+        $farmsales = $farmsales 
+                    ::whereIn('lot_id',$lot_ids)
+                    ->get();
+                    
         return view('farmsales.index')
             ->with('farmsales', $farmsales);
     }
