@@ -6,6 +6,7 @@ use App\Http\Requests\CreateTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Repositories\TaskRepository;
 use App\Repositories\LotRepository;
+use App\Repositories\FarmRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -17,12 +18,15 @@ class TaskController extends AppBaseController
     /** @var  TaskRepository */
     private $taskRepository;
     private $lotRepository;
+    private $farmRepository;
 
     public function __construct(TaskRepository $taskRepo,
-                                LotRepository $lotRepo)
+                                LotRepository $lotRepo,
+                                FarmRepository $farmRepo)
     {
         $this->taskRepository = $taskRepo;
         $this->lotRepository = $lotRepo;
+        $this->farmRepository = $farmRepo;
     }
 
     /**
@@ -34,9 +38,13 @@ class TaskController extends AppBaseController
     public function index(Request $request)
     {
         $this->taskRepository->pushCriteria(new RequestCriteria($request));
-        $farm_ids = \Auth::user()->farms()->select('id')->get();
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();        
         
-        $tasks = $this->taskRepository->model();
        
         $lot_ids =$this->lotRepository->model()
                             ::whereIn('farm_id',$farm_ids)

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateFarmproductRequest;
 use App\Http\Requests\UpdateFarmproductRequest;
 use App\Repositories\FarmproductRepository;
+use App\Repositories\LotRepository;
+use App\Repositories\FarmRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +17,16 @@ class FarmproductController extends AppBaseController
 {
     /** @var  FarmproductRepository */
     private $farmproductRepository;
+    private $lotRepository;
+    private $farmRepository;
 
-    public function __construct(FarmproductRepository $farmproductRepo)
+    public function __construct(FarmproductRepository $farmproductRepo,
+                                LotRepository $lotRepo,
+                                FarmRepository $farmRepo)
     {
         $this->farmproductRepository = $farmproductRepo;
+        $this->lotRepository = $lotRepo;
+        $this->farmRepository = $farmRepo;
     }
 
     /**
@@ -30,7 +38,23 @@ class FarmproductController extends AppBaseController
     public function index(Request $request)
     {
         $this->farmproductRepository->pushCriteria(new RequestCriteria($request));
-        $farmproducts = $this->farmproductRepository->all();
+        $farmproducts = $this->farmproductRepository->model();
+
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();
+        //get lots belonging to that user
+        $lot_ids = $this->lotRepository->model()
+                    ::whereIn('farm_id',$farm_ids)
+                    ->select('id')
+                    ->get();
+        //get his farm products
+        $farmproducts = $farmproducts
+                        ::whereIn('lot_id',$lot_ids)
+                        ->get(); 
 
         return view('farmproducts.index')
             ->with('farmproducts', $farmproducts);
