@@ -6,8 +6,8 @@
 
 <!-- Unitofmeasure Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('unitofmeasure_id', 'Unitofmeasure Id:') !!}
-    {!! Form::number('unitofmeasure_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('unitofmeasure_id', 'Unit of measure :') !!}
+    {!! Form::select('unitofmeasure_id', $units, $agroinput->unitofmeasure_id, ['placeholder' => 'Pick a unit of measure...','class' => 'form-control'])!!}    
 </div>
 
 <!-- Submit Field -->

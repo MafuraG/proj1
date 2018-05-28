@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAgroinputRequest;
 use App\Http\Requests\UpdateAgroinputRequest;
 use App\Repositories\AgroinputRepository;
+use App\Repositories\UnitofmeasureRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +16,13 @@ class AgroinputController extends AppBaseController
 {
     /** @var  AgroinputRepository */
     private $agroinputRepository;
+    private $unitofmeasureRepository;
 
-    public function __construct(AgroinputRepository $agroinputRepo)
+    public function __construct(AgroinputRepository $agroinputRepo,
+                                UnitofmeasureRepository $unitofmeasureRepo)
     {
         $this->agroinputRepository = $agroinputRepo;
+        $this->unitofmeasureRepository = $unitofmeasureRepo;
     }
 
     /**
@@ -93,15 +97,13 @@ class AgroinputController extends AppBaseController
      */
     public function edit($id)
     {
-        $agroinput = $this->agroinputRepository->findWithoutFail($id);
+        $agroinput = $this->agroinputRepository->findWithoutFail($id);        
 
-        if (empty($agroinput)) {
-            Flash::error('Agroinput not found');
+        $items = $this->getdropdownData($this->unitofmeasureRepository->model());
 
-            return redirect(route('agroinputs.index'));
-        }
-
-        return view('agroinputs.edit')->with('agroinput', $agroinput);
+        return view('agroinputs.edit')
+                    ->with('units', $items)
+                    ->with('agroinput', $agroinput);
     }
 
     /**

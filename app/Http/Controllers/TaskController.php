@@ -107,14 +107,11 @@ class TaskController extends AppBaseController
      */
     public function edit($id)
     {
-        $task = $this->taskRepository->findWithoutFail($id);
-        $user = \Auth::user();
-
-        $userfarms_ids = $user->farms()->select('id')->get();
-        //echo($userfarms_ids) ;
+        $task = $this->taskRepository->findWithoutFail($id);        
 
         $lot = $this->lotRepository->model();
-        $datas = $lot::whereIn('farm_id',$userfarms_ids)->get();
+        $datas = $lot::where('farm_id',$task->lot->farm_id)
+                    ->get();        
         $items = array();
         foreach ($datas as $data)
         {

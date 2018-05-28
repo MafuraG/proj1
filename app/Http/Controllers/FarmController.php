@@ -30,7 +30,10 @@ class FarmController extends AppBaseController
     public function index(Request $request)
     {
         $this->farmRepository->pushCriteria(new RequestCriteria($request));
-        $farms = $this->farmRepository->all();
+        $farms = $this->farmRepository->model();
+        $user = \Auth::user();
+
+        $farms = $farms::where('user_id',$user->id)->get();
 
         return view('farms.index')
             ->with('farms', $farms);
