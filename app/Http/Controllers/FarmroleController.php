@@ -32,6 +32,8 @@ class FarmroleController extends AppBaseController
         $this->farmroleRepository->pushCriteria(new RequestCriteria($request));
         $farmroles = $this->farmroleRepository->all();
 
+        $user = \Auth::user();
+
         return view('farmroles.index')
             ->with('farmroles', $farmroles);
     }

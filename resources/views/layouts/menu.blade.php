@@ -1,7 +1,7 @@
 
-<li class="{{ Request::is('users*') ? 'active' : '' }}">
+<!-- <li class="{{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}"><i class="fas fas-address-card"></i><span>Users</span></a>
-</li>
+</li> -->
 
 
 <li class="{{ Request::is('farmroles*') ? 'active' : '' }}">
