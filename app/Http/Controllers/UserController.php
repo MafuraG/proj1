@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
+use App\Repositories\FarmroleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +16,13 @@ class UserController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
+    private $farmroleRepository;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo,
+                                FarmroleRepository $farmroleRepo)
     {
         $this->userRepository = $userRepo;
+        $this->farmroleRepository = $farmroleRepo;
     }
 
     /**
@@ -104,7 +108,12 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        $model = $this->farmroleRepository->model();
+        $farmroles = $this->getdropdownData($model);
+
+        return view('users.edit')
+                    ->with('farmroles', $farmroles)
+                    ->with('user', $user);
     }
 
     /**

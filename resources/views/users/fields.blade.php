@@ -12,8 +12,8 @@
 
 <!-- Farmrole Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('farmrole_id', 'Farmrole Id:') !!}
-    {!! Form::number('farmrole_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('farmrole_id', 'Farmrole Id:') !!}    
+    {!! Form::select('farmrole_id', $farmroles, $user->farmrole_id, ['placeholder' => 'Pick a farm role...','class' => 'form-control'])!!}
 </div>
 
 <!-- Submit Field -->

@@ -14,7 +14,11 @@
         <tr>
             <td>{!! $lot->name !!}</td>
             <td>{!! $lot->detail !!}</td>
-            <td>{!! $lot->active !!}</td>
+            @if ($lot->active)
+                <td>Active</td>
+            @else
+                <td>Not Active </td>
+            @endif    
             <td>{!! $lot->farm->name !!}</td>
             <td>{!! $lot->product->name !!}</td>
             <td>
