@@ -60,6 +60,10 @@ class FarmController extends AppBaseController
     {
         $input = $request->all();
 
+        //add current user id
+        $user = \Auth::user();
+        $input['user_id'] = $user->id;
+
         $farm = $this->farmRepository->create($input);
 
         Flash::success('Farm saved successfully.');

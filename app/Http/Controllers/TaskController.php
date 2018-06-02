@@ -65,7 +65,24 @@ class TaskController extends AppBaseController
      */
     public function create()
     {
-        return view('tasks.create');
+        $task = $this->taskRepository->model();
+        $task = new $task;
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();        
+        
+       
+        $lots = $this->lotRepository->model()
+                            ::whereIn('farm_id',$farm_ids)
+                            ->select('id','name')
+                            ->get();
+        $lots = $this->getdropdownData($lots);
+        return view('tasks.create')
+                        ->with('task', $task)
+                        ->with('userlots',$lots);
     }
 
     /**

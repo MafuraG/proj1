@@ -21,14 +21,14 @@
 
 <!-- Farm Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('farm_id', 'Farm Id:') !!}
-    {!! Form::number('farm_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('farm_id', 'Farm :') !!}
+    {!! Form::select('farm_id', $farms, $lot->farm_id, ['placeholder' => 'Choose farm...','class' => 'form-control'])!!}
 </div>
 
 <!-- Product Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('product_id', 'Product Id:') !!}
-    {!! Form::number('product_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('product_id', 'Product :') !!}
+    {!! Form::select('product_id', $products, $lot->product_id, ['placeholder' => 'Pick a product...','class' => 'form-control'])!!}
 </div>
 
 <!-- Submit Field -->

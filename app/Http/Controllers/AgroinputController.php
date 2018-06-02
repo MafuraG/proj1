@@ -99,7 +99,8 @@ class AgroinputController extends AppBaseController
     {
         $agroinput = $this->agroinputRepository->findWithoutFail($id);        
 
-        $items = $this->getdropdownData($this->unitofmeasureRepository->model());
+        $units = $this->unitofmeasureRepository->all();
+        $items = $this->getdropdownData($units);
 
         return view('agroinputs.edit')
                     ->with('units', $items)

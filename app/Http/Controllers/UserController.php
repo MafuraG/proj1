@@ -108,7 +108,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $model = $this->farmroleRepository->model();
+        $model = $this->farmroleRepository->all();
         $farmroles = $this->getdropdownData($model);
 
         return view('users.edit')

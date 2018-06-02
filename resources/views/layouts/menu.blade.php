@@ -53,7 +53,7 @@
 </li>
 
 
-<li class="Active">
+<li class="Active ">
     <a href="#">
         <i class="fas fa-toolbox"></i>
         <span> Settings</span>

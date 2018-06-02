@@ -11,8 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected function getdropdownData($model){
-        $datas = $model::select('id','name')->get();
+    protected function getdropdownData($datas){      
 
         $items = array();
         foreach ($datas as $data)

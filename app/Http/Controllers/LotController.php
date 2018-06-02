@@ -6,6 +6,7 @@ use App\Http\Requests\CreateLotRequest;
 use App\Http\Requests\UpdateLotRequest;
 use App\Repositories\LotRepository;
 use App\Repositories\FarmRepository;
+use App\Repositories\ProductRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -17,12 +18,15 @@ class LotController extends AppBaseController
     /** @var  LotRepository */
     private $lotRepository;
     private $farmRepository;
+    private $productRepository;
 
     public function __construct(LotRepository $lotRepo,
-                                FarmRepository $farmRepo)
+                                FarmRepository $farmRepo,
+                                ProductRepository $productRepo)
     {
         $this->lotRepository = $lotRepo;
         $this->farmRepository = $farmRepo;
+        $this->productRepository = $productRepo;
     }
 
     /**
@@ -55,8 +59,23 @@ class LotController extends AppBaseController
      */
     public function create()
     {
-        return view('lots.create');
-    }
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farms = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id','name')
+                        ->get();  
+        $farms = $this->getdropdownData($farms);
+
+        $products = $this->productRepository->all();
+        $products = $this->getdropdownData($products);
+        $lot = $this->lotRepository->model();
+        $lot = new $lot;
+        return view('lots.create')
+                    ->with('lot', $lot)
+                    ->with('farms',$farms)
+                    ->with('products',$products);
+        }
 
     /**
      * Store a newly created Lot in storage.
@@ -113,7 +132,21 @@ class LotController extends AppBaseController
             return redirect(route('lots.index'));
         }
 
-        return view('lots.edit')->with('lot', $lot);
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farms = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id','name')
+                        ->get();  
+        $farms = $this->getdropdownData($farms);
+
+        $products = $this->productRepository->all();
+        $products = $this->getdropdownData($products);
+
+        return view('lots.edit')
+                    ->with('lot', $lot)
+                    ->with('farms',$farms)
+                    ->with('products',$products);
     }
 
     /**
