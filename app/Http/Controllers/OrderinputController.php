@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateOrderinputRequest;
 use App\Http\Requests\UpdateOrderinputRequest;
 use App\Repositories\OrderinputRepository;
+use App\Repositories\LotRepository;
+use App\Repositories\FarmRepository;
+use App\Repositories\TaskRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +18,19 @@ class OrderinputController extends AppBaseController
 {
     /** @var  OrderinputRepository */
     private $orderinputRepository;
+    private $lotRepository;
+    private $farmRepository;
+    private $taskRepository;
 
-    public function __construct(OrderinputRepository $orderinputRepo)
+    public function __construct(OrderinputRepository $orderinputRepo,
+                                LotRepository $lotRepo,
+                                FarmRepository $farmRepo,
+                                TaskRepository $taskRepo)
     {
         $this->orderinputRepository = $orderinputRepo;
+        $this->lotRepository = $lotRepo;
+        $this->farmRepository = $farmRepo;
+        $this->taskRepository = $taskRepo;
     }
 
     /**
@@ -30,8 +42,26 @@ class OrderinputController extends AppBaseController
     public function index(Request $request)
     {
         $this->orderinputRepository->pushCriteria(new RequestCriteria($request));
-        $orderinputs = $this->orderinputRepository->all();
-
+        
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();
+        //get lots belonging to that user
+        $lot_ids = $this->lotRepository->model()
+                    ::whereIn('farm_id',$farm_ids)
+                    ->select('id')
+                    ->get();
+        //get tasks belonging to given user
+        $task_ids = $this->taskRepository->model()
+                    ::whereIn('lot_id',$lot_ids)
+                    ->select('id')
+                    ->get();
+        $orderinputs = $this->orderinputRepository->model()
+                        ::whereIn('task_id',$task_ids)
+                        ->get();
         return view('orderinputs.index')
             ->with('orderinputs', $orderinputs);
     }

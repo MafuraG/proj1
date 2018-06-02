@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateLotRequest;
 use App\Http\Requests\UpdateLotRequest;
 use App\Repositories\LotRepository;
+use App\Repositories\FarmRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -15,10 +16,13 @@ class LotController extends AppBaseController
 {
     /** @var  LotRepository */
     private $lotRepository;
+    private $farmRepository;
 
-    public function __construct(LotRepository $lotRepo)
+    public function __construct(LotRepository $lotRepo,
+                                FarmRepository $farmRepo)
     {
         $this->lotRepository = $lotRepo;
+        $this->farmRepository = $farmRepo;
     }
 
     /**
@@ -30,7 +34,15 @@ class LotController extends AppBaseController
     public function index(Request $request)
     {
         $this->lotRepository->pushCriteria(new RequestCriteria($request));
-        $lots = $this->lotRepository->all();
+        $user = \Auth::user();
+        //get farms belonging to given user
+        $farm_ids = $this->farmRepository->model()
+                        ::where('user_id',$user->id)
+                        ->select('id')
+                        ->get();  
+        $lots = $this->lotRepository->model()
+                        ::whereIn('farm_id',$farm_ids)
+                        ->get();
 
         return view('lots.index')
             ->with('lots', $lots);
