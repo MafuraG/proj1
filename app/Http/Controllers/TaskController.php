@@ -72,14 +72,14 @@ class TaskController extends AppBaseController
         $farm_ids = $this->farmRepository->model()
                         ::where('user_id',$user->id)
                         ->select('id')
-                        ->get();        
-        
+                        ->get();   
        
         $lots = $this->lotRepository->model()
                             ::whereIn('farm_id',$farm_ids)
                             ->select('id','name')
                             ->get();
-        $lots = $this->getdropdownData($lots);
+                            
+        $lots = $this->getdropdownData($lots);        
         return view('tasks.create')
                         ->with('task', $task)
                         ->with('userlots',$lots);

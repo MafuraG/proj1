@@ -1,17 +1,19 @@
 <table class="table table-responsive" id="tasks-table">
     <thead>
         <tr>
-            <th>Name</th>
-        <th>Detail</th>
-        <th>Lot Id</th>
-            <th colspan="3">Action</th>
+        <th>Name</th>
+        <th>Start</th>
+        <th>Complete</th>
+        <th>Lot</th>        
+        <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($tasks as $task)
         <tr>
             <td>{!! $task->name !!}</td>
-            <td>{!! $task->detail !!}</td>
+            <td>{!! $task->started_at !!}</td>
+            <td>{!! $task->completed_at !!}</td>
             <td>{!! $task->lot->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}

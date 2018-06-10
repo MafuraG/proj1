@@ -4,8 +4,8 @@
             <th>Name</th>
         <th>Detail</th>
         <th>Active</th>
-        <th>Farm Id</th>
-        <th>Product Id</th>
+        <th>Farm </th>
+        <th>Product </th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

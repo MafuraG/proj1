@@ -52,6 +52,63 @@
     </ul>
 </li>
 
+<li class="Active">
+    <a href="#">
+        <i class="fas fa-align-justify"></i>
+        <span> My Bids</span>
+    </a>
+    <ul>
+        <li class="{{ Request::is('orderinputs*') ? 'active' : '' }}">
+            <a href="{!! route('orderinputs.index') !!}">
+                <i class="fas fa-folder-open"></i><span> Inputs</span>
+                <!-- Here we will have 4 columns 
+                    1. Farm name
+                    2. Input needed
+                    3. Quantity of input
+                    4. open date
+                    5. close date                    
+                    6. placing bids-->
+            </a>
+        </li>
+
+        <li class="{{ Request::is('orderservices*') ? 'active' : '' }}">
+            <a href="{!! route('orderservices.index') !!}">
+                <i class="fas fa-folder-open"></i><span> Services</span>
+                <!-- Here we will have 4 columns 
+                    1. Farm name
+                    2. Service needed 
+                    3. open date 
+                    4. close date                  
+                    5. placing bids-->
+            </a>
+        </li>
+        <li class="{{ Request::is('orderinputs*') ? 'active' : '' }}">
+            <a href="{!! route('orderinputs.index') !!}">
+                <i class="fas fa-folder-open"></i><span> Transactions - inputs</span>
+                <!-- Here we will have 4 columns 
+                    1. Farm name
+                    2. Input name
+                    3. quantity
+                    4. price
+                    5. pay status
+                    6. delivery status-->
+            </a>
+        </li>
+
+        <li class="{{ Request::is('orderservices*') ? 'active' : '' }}">
+            <a href="{!! route('orderservices.index') !!}">
+                <i class="fas fa-folder-open"></i><span> Transactions - services</span>
+                <!-- Here we will have 4 columns 
+                    1. Farm name
+                    2. service name                    
+                    3. price
+                    4. pay status
+                    5. delivery status -->
+                    
+            </a>
+        </li>
+    </ul>
+</li>
 
 <li class="Active ">
     <a href="#">

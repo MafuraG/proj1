@@ -35,7 +35,9 @@ class Task extends Model
     public $fillable = [
         'name',
         'detail',
-        'lot_id'
+        'lot_id',
+        'started_at',
+        'completed_at'
     ];
 
     /**
