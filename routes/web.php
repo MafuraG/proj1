@@ -47,3 +47,7 @@ Route::resource('agroservices', 'AgroserviceController');
 Route::resource('orderservices', 'OrderserviceController');
 
 Route::resource('farmproducts', 'FarmproductController');
+
+Route::resource('tests', 'testController');
+
+Route::resource('categories', 'CategoryController');
